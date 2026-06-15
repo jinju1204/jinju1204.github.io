@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>진주원 | Juwon Jin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a1a;
+      --surface: #12122a;
+      --card: #1a1a35;
+      --accent: #7c6af7;
+      --accent2: #a78bfa;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #2d2d5a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10,10,26,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent2); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--accent2); }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; max-width: 860px; margin: 0 auto; }
+    section:first-of-type { padding-top: 8rem; }
+
+    h2 {
+      font-size: 1.6rem;
+      color: var(--accent2);
+      margin-bottom: 2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* HERO */
+    #about {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e1b4b, #4c1d95, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 0 30px rgba(124,106,247,0.4);
+      border: 3px solid var(--accent);
+    }
+
+    .hero-name {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--accent2);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .hero-bio {
+      color: var(--muted);
+      max-width: 500px;
+    }
+
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent2); }
+    .btn-outline {
+      border: 1px solid var(--accent);
+      color: var(--accent2);
+    }
+    .btn-outline:hover { background: var(--accent); color: #fff; }
+
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 { color: var(--accent2); margin-bottom: 0.3rem; font-size: 1rem; }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+    .card .tag {
+      display: inline-block;
+      background: #1e1b4b;
+      color: var(--accent2);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      margin-right: 0.3rem;
+    }
+
+    /* CV */
+    .cv-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      align-items: flex-start;
+    }
+    .cv-year {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      min-width: 60px;
+      padding-top: 2px;
+    }
+    .cv-content h3 { font-size: 0.95rem; color: var(--text); }
+    .cv-content p { font-size: 0.85rem; color: var(--muted); }
+
+    /* COURSES */
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.8rem;
+    }
+    .course-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .course-item span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--accent2);
+      margin-top: 0.2rem;
+    }
+
+    /* CONTACT */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .contact-item a { color: var(--accent2); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+    .contact-icon { font-size: 1.2rem; }
+
+    /* AI USAGE */
+    .ai-box {
+      background: var(--card);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .ai-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .ai-box code {
+      background: #0a0a1a;
+      color: var(--accent2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      nav ul { gap: 1rem; }
+      .hero-name { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">✦ 진주원</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="avatar">🌠</div>
+  <h1 class="hero-name">진주원</h1>
+  <p class="hero-sub">컴퓨터공학부 · 서울대학교</p>
+  <p class="hero-bio">서울대학교 컴퓨터공학부에 재학 중입니다. 애니메이션 원피스를 좋아합니다.</p>
+  <div class="btn-row">
+    <a href="assets/cv.pdf" class="btn btn-primary" target="_blank">CV 보기</a>
+    <a href="#contact" class="btn btn-outline">연락하기</a>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <h2>CV / 이력</h2>
+
+  <div class="card">
+    <h3>학력</h3>
+    <div class="cv-item" style="margin-top:0.8rem">
+      <div class="cv-year">2025–</div>
+      <div class="cv-content">
+        <h3>서울대학교</h3>
+        <p>컴퓨터공학부 재학</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>기술 스택</h3>
+    <div style="margin-top:0.5rem">
+      <span class="tag">C</span>
+      <span class="tag">C++</span>
+      <span class="tag">Python</span>
+      <span class="tag">Java</span>
+      <span class="tag">HTML/CSS</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Projects & 활동</h2>
+
+  <div class="card">
+    <h3>논리설계 기말 프로젝트</h3>
+    <p>디지털 논리 회로 설계 및 Verilog HDL을 활용한 프로세서 구현</p>
+    <span class="tag">Verilog</span>
+    <span class="tag">논리설계</span>
+  </div>
+
+  <div class="card">
+    <h3>컴퓨터 프로그래밍 과제</h3>
+    <p>C/C++ 기반 자료구조 및 알고리즘 구현 과제 수행</p>
+    <span class="tag">C++</span>
+    <span class="tag">자료구조</span>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <h2>수강 예정 과목</h2>
+  <div class="course-list">
+    <div class="course-item">
+      공학수학 2
+      <span>수학 · 예정</span>
+    </div>
+    <div class="course-item">
+      알고리즘
+      <span>전공필수 · 예정</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-item">
+    <span class="contact-icon">📧</span>
+    <a href="mailto:jinju10041204@gmail.com">jinju10041204@gmail.com</a>
+  </div>
+  <div class="contact-item">
+    <span class="contact-icon">🐙</span>
+    <a href="https://github.com/jinju1204" target="_blank">github.com/jinju1204</a>
+  </div>
+</section>
+
+<!-- AI USAGE -->
+<section id="ai">
+  <h2>AI Usage</h2>
+  <div class="ai-box">
+    <p><strong>Tool:</strong> <code>Claude Code</code></p>
+    <p><strong>Prompt:</strong> <code>Build a static personal website in the repo root. Use a CSS avatar as the profile image. Make the page responsive and accessible. Keep it compatible with GitHub Pages.</code></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 진주원 · Built with Claude Code & GitHub Pages
+</footer>
+
+</body>
+</html>
